@@ -3,6 +3,10 @@
 {%- endparse_json -%}
 {% log response_body, type: "RESPONSE BODY" %}
 
+{% for rate in response_body.rates %}
+   {% hash_assign response_body["rates"][forloop.index0]["servicelevel"]["terms"] = ""%}
+{% endfor %}
+
 {%- if shippo_response.status == 201 -%}
 
   {%- assign now = 'now' | to_time | strftime: "%d-%m-%Y %H:%M:%S"  -%}
